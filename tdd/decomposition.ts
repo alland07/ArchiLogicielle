@@ -14,3 +14,6 @@ export const Decomposition = (number : number): Array<Number> => {
   }
   return res;
 };
+
+
+
