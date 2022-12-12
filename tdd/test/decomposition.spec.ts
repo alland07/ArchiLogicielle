@@ -15,7 +15,8 @@ describe('Decomposition', () => {
       expect(Decomposition(7)).toEqual([7]);
     });
   });
-  describe('Nombres non premiers', () => {
+
+  describe('Nombres composés', () => {
     it('should return [2, 2] when 4 is provided', function () {
       expect(Decomposition(4)).toEqual([2, 2]);
     });
@@ -28,6 +29,5 @@ describe('Decomposition', () => {
     it('should return [3, 5] when 15 is provided', function () {
       expect(Decomposition(15)).toEqual([3, 5]);
     });
-
   })
 });
