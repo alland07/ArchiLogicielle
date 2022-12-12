@@ -29,5 +29,8 @@ describe('Decomposition', () => {
     it('should return [3, 5] when 15 is provided', function () {
       expect(Decomposition(15)).toEqual([3, 5]);
     });
+    it('should return [2, 2, 3, 5, 7, 11, 13] when 30030 is provided', function () {
+      expect(Decomposition(2 * 2 * 3 * 5 * 7 * 11 * 13)).toEqual([2, 2, 3, 5, 7, 11, 13]);
+    });
   })
 });
