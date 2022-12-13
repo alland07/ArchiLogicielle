@@ -1,14 +1,14 @@
-// const hasNegativeValuesEidanVersion = (numbers: Array<number>): number => {
-//   let negativeArray = []
-//   numbers.forEach(el => {
-//      if(Math.sign(el) === -1){
-//        negativeArray.push(el)
-//      }
-//   });
-//   if(negativeArray.length){
-//        throw Error('nombre negatif')
-//   }
-// }
+export const hasNegativeValuesEidanVersion = (numbers: Array<number>): void => {
+  let negativeArray = [];
+  numbers.forEach(el => {
+     if(Math.sign(el) === -1){
+       negativeArray.push(el)
+     }
+  });
+  if(negativeArray.length){
+       throw Error(`Negative value [${negativeArray}]`);
+  }
+}
 
 
 
