@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "workspaces": [
+    "back",
+    "front",
+    "tdd"
+  ],
+  "packageManager": "yarn@3.2.4"
+}

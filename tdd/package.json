@@ -1,10 +1,10 @@
 {
-  "name": "jest",
+  "name": "tdd",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watchAll test/decomposition.spec.ts"
+    "test": "jest --watchAll"
   },
   "author": "",
   "license": "ISC",
