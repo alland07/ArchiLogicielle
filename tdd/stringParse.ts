@@ -38,12 +38,12 @@ export const stringParse = (input: string) => {
     formattedInput = newFormattedInput;
   }
 
-  let result: Array<number>;
+  let result = 0;
   let parts: number[] = formattedInput
     .split(new RegExp(`[${delimiters.join('')}]`))
     .map((part) => parseInt(part));
-  result = checkNegativeValue(parts);
-  //parts.forEach((part) => (result += part));
+  parts.forEach((part) => (result += part));
+  hasNegativeValuesEidanVersion(parts);
 
   return result;
 };
