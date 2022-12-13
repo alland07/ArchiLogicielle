@@ -1,9 +1,8 @@
 {
   "private": true,
   "workspaces": [
-    "back",
-    "front",
-    "tdd"
+    "tdd",
+    "core"
   ],
   "packageManager": "yarn@3.2.4",
   "scripts": {
