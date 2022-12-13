@@ -74,5 +74,8 @@ describe("Exo3", () => {
     it("should return 2 when 1001,2 provided", () => {
       expect(stringParse("1001,2")).toBe(2);
     });
+    it('should return 1002 when 1000,2 provided', () => {
+      expect(stringParse("1000,2")).toBe(1002);
+    });
   });
 });
