@@ -53,6 +53,26 @@ describe("Exo3", () => {
     it("should throw an error when -1 provided", () => {
       expect(() => stringParse("-1")).toThrowError();
     });
-    // lister les nombres négatifs si plusieurs
+    it("should throw an error when -1,-2 provided", () => {
+      expect(() => stringParse("-1,-2")).toThrow('Negative value [-1,-2]');
+    });
+    it("should throw an error when -1\n-2 provided", () => {
+      expect(() => stringParse("-1\n-2")).toThrow('Negative value [-1,-2]');
+    });
+    it("should throw an error when 1\n-2 provided", () => {
+      expect(() => stringParse("1\n-2")).toThrow('Negative value [-2]');
+    });
+    it("should throw an error when //;\n1;-2 provided", () => {
+      expect(() => stringParse("//;\n1;-2")).toThrow('Negative value [-2]');
+    });
+  });
+  describe("Point 5", () => {
+    // ignorer les nombres plus grands que 1000
+    it("should return 2 when 2,1001 provided", () => {
+      expect(stringParse("2,1001")).toBe(2);
+    });
+    it("should return 2 when 1001,2 provided", () => {
+      expect(stringParse("1001,2")).toBe(2);
+    });
   });
 });

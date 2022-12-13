@@ -23,3 +23,14 @@ export const hasNegativeValuesEidanVersion = (numbers: Array<number>): void => {
 //   ))
 // }
 
+export const checkNegativeValue = (numbers: Array<number>): void => {
+  let negative: Array<number> = [];
+  numbers.forEach((part: number) => {
+    if (part < 0) {
+      negative.push(part);
+    }
+  });
+  if (negative.length > 0) {
+    throw Error(`Negative value [${negative}]`);
+  }
+}

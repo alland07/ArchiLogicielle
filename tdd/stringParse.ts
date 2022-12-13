@@ -1,4 +1,4 @@
-import { checkNegativeValue } from "./checkNegativeValue";
+import { hasNegativeValuesEidanVersion } from "./negativeFunction";
 
 /**
  * Checks whether the input string has a custom delimiter.
@@ -39,11 +39,13 @@ export const stringParse = (input: string) => {
   }
 
   let result = 0;
-  let parts: number[] = formattedInput
+  let numbers: number[] = formattedInput
     .split(new RegExp(`[${delimiters.join('')}]`))
     .map((part) => parseInt(part));
-  parts.forEach((part) => (result += part));
-  hasNegativeValuesEidanVersion(parts);
+  numbers
+    .filter((part) => part <= 1000)
+    .forEach((part) => (result += part));
+  hasNegativeValuesEidanVersion(numbers);
 
   return result;
 };
