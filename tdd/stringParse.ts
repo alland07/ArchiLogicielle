@@ -43,8 +43,8 @@ export const stringParse = (input: string) => {
     .split(new RegExp(`[${delimiters.join('')}]`))
     .map((part) => parseInt(part));
   numbers
-    .filter((part) => part <= 1000)
-    .forEach((part) => (result += part));
+    .filter((part) => part <= 1000) // remove numbers > 1000
+    .forEach((part) => (result += part)); // sum the numbers
   hasNegativeValuesEidanVersion(numbers);
 
   return result;
