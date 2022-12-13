@@ -5,5 +5,8 @@
     "front",
     "tdd"
   ],
-  "packageManager": "yarn@3.2.4"
+  "packageManager": "yarn@3.2.4",
+  "scripts": {
+    "test": "yarn workspaces foreach -piv run test"
+  }
 }
