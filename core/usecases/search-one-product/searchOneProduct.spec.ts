@@ -1,13 +1,14 @@
-import { InMemoryProductGateway } from "../../../adapteurs/secondary/inMemoryProductGateway";
+import { InMemoryProductGateway } from "../../../adapters/secondary/inMemoryProductGateway";
 import { searchOneProduct } from "./searchOneProduct";
 import { Product } from "../../entities/product";
 import { ProductNotFound } from "../../errors/productNotFound";
+import { NodeCryptographyGateway } from "../../../adapters/secondary/nodeCryptographyGateway";
 
 describe("Search one product", () => {
   // Setup
   let productGateway: InMemoryProductGateway;
   beforeEach(() => {
-    productGateway = new InMemoryProductGateway();
+    productGateway = new InMemoryProductGateway(new NodeCryptographyGateway());
   });  
   
   it("should throw a ProductNotFound error when the product is not present", () => {

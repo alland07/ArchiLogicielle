@@ -3,3 +3,5 @@ export interface Product {
   name: string
   imgUrl: string
 }
+
+export type CreateProduct = Omit<Product, "id">;

@@ -1,11 +1,12 @@
 import { listAllProducts } from "./listAllProducts";
-import { InMemoryProductGateway } from "../../../adapteurs/secondary/inMemoryProductGateway";
+import { InMemoryProductGateway } from "../../../adapters/secondary/inMemoryProductGateway";
 import { Product } from "../../entities/product";
+import { NodeCryptographyGateway } from "../../../adapters/secondary/nodeCryptographyGateway";
 
 describe("List all products", () => {
   let productGateway: InMemoryProductGateway;
   beforeEach(() => {
-    productGateway = new InMemoryProductGateway();
+    productGateway = new InMemoryProductGateway(new NodeCryptographyGateway());
   });
   it("should return [] when there is no products", async () => {
     const allProducts = await listAllProducts(productGateway);
