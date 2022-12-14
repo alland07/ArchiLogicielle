@@ -6,7 +6,6 @@ export interface ProductGateway {
    * @returns {Promise<Array<Product>>} The list of products
    */
   listAll(): Promise<Array<Product>>
-
   /**
    * Search one product by id
    * @param id
@@ -15,11 +14,5 @@ export interface ProductGateway {
    */
   findOne(id: string): Promise<Product>
 
-  /**
-   * Save a product
-   * @param product
-   * @returns {Promise<Product>} The product saved
-   * @throws {ProductAlreadyExists} if product already exists
-   */
   create(product: CreateProduct): Promise<Product>
 }

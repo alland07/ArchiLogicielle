@@ -36,7 +36,7 @@ export class InMemoryProductGateway implements ProductGateway {
       && item.price === product.price
     ));
     if (exist) {
-      throw new ProductAlreadyExists();
+        throw new ProductAlreadyExists();
     }
 
     const id: string = this.crypto.createId(product.name, product.price.toString());

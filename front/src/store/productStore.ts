@@ -4,7 +4,7 @@ import { Product } from "../core/entities/product";
 export const useProductStore = defineStore('ProductStore', {
   state: () => {
     return {
-      items: [] as Product[]
+      items: [] as Product[],
     }
   },
   actions: {
