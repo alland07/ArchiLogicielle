@@ -1,7 +1,7 @@
-import { createProductVM } from './createProductVM'
+import { CreateProductVM, createProductVM } from "./createProductVM";
 
 describe('Create product VM', () => {
-  let vm
+  let vm: CreateProductVM;
   beforeEach(() => {
     vm = createProductVM()
   })
