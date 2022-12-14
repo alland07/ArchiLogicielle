@@ -1,9 +1,10 @@
 import { ProductGateway } from "../../gateways/productGateway";
 import { Product } from "../../entities/product";
-import { ProductStore } from "./productStore";
+import { ProductStore, useProductStore } from "../../../store/productStore";
 
-export const listAllProducts = async (productGateway: ProductGateway, productStore: ProductStore): Promise<Array<Product>> => {
+export const listAllProducts = async (productGateway: ProductGateway): Promise<Array<Product>> => {
   const products: Product[] = await productGateway.listAll();
-  productStore.items = products;
+  const productStore: ProductStore = useProductStore();
+  productStore.setItems(products);
   return products;
 };

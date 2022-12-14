@@ -5,3 +5,7 @@ export interface Product {
 }
 
 export type CreateProduct = Omit<Product, "id">;
+
+export type ProductVM = Omit<Product, "price"> & {
+  price: string
+}; // change type of price from number to string

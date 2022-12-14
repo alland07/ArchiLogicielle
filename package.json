@@ -3,10 +3,13 @@
   "packageManager": "yarn@3.2.4",
   "scripts": {
     "test": "jest --watchAll",
-    "dev": "ts-node-dev back/adapters/primary/express/app.ts --watch"
+    "dev:back": "ts-node-dev back/adapters/primary/express/app.ts --watch",
+    "dev:front": "nuxt dev"
   },
   "dependencies": {
+    "@pinia/nuxt": "^0.4.6",
     "express": "^4.18.2",
+    "nuxt": "^3.0.0",
     "pinia": "^2.0.28",
     "vue": "^3.2.45"
   },
