@@ -10,7 +10,10 @@ export const useProductStore = defineStore('ProductStore', {
   actions: {
     setItems(items: Product[]) {
       this.items = items
-    }
+    },
+    addItem(item: Product) {
+      this.items.push(item)
+    },
   }
 });
 

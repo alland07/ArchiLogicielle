@@ -31,7 +31,7 @@ export class InMemoryProductGateway implements ProductGateway {
 
   public create(product: CreateProduct): Promise<Product> {
     // Check if product already exists
-    const exist: Product | undefined = this.products.find((item: Product) => (
+    const exist: boolean = this.products.some((item: Product) => (
       item.name === product.name
       && item.price === product.price
     ));
