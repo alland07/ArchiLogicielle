@@ -1,11 +1,14 @@
-import { defineNuxtConfig } from 'nuxt/config'
+import { defineNuxtConfig } from "nuxt/config";
 
 export default defineNuxtConfig({
   typescript: {
-    strict: true
+    strict: true,
   },
-  modules: ['@pinia/nuxt'],
+  modules: ["@/pinia/nuxt"],
   dir: {
-    pages: './front/src/adapters/primary/nuxt/pages'
-  }
-})
+    pages: "./src/adapters/primary/nuxt/pages",
+  },
+  alias: {
+    "@": "./src",
+  },
+});
