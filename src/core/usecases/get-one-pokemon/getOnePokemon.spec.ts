@@ -19,11 +19,6 @@ describe("Get the data of a pokemon with his id", () => {
     it("should throw an invalid id error if id is less than 1", async () => {
       expect(() => getOnePokemon(pokemonGateway, 0)).toThrow("Invalid id 0");
     });
-
-    it("should not throw an error if id is valid", async () => {
-      pokemonGateway.feedWith(bulbasaur);
-      expect(() => getOnePokemon(pokemonGateway, 1)).not.toThrow();
-    });
   });
 
   describe("then it gets the pokemon", () => {
@@ -33,9 +28,16 @@ describe("Get the data of a pokemon with his id", () => {
       );
     });
 
-    it("should return the pokemon with corresponding id", async () => {
-      pokemonGateway.feedWith(pikachu);
-      expect(await getOnePokemon(pokemonGateway, 25)).toBe(pikachu);
+    describe('Get one pokemon', function () {
+      it("should return the pokemon with corresponding id", async () => {
+        pokemonGateway.feedWith(pikachu, bulbasaur);
+        expect(await getOnePokemon(pokemonGateway, 25)).toBe(pikachu);
+      });
+
+      it("should return the pokemon with corresponding id", async () => {
+        pokemonGateway.feedWith(pikachu, bulbasaur);
+        expect(await getOnePokemon(pokemonGateway, 1)).toBe(bulbasaur);
+      });
     });
   });
 });

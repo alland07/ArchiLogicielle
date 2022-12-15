@@ -1,8 +1,10 @@
 import { PokemonGateway } from "@/core/gateways/pokemonGateway";
 import { Pokemon, PokemonType } from "@/core/entities/pokemon";
-import { TypeDoesNotExist } from "@/core/errors/typeDoesNotExist";
+import axios from "axios";
 
 export class PokeApiPokemonGateway implements PokemonGateway {
+  private readonly pokemonTypes: any = PokemonType;
+
   public findOne(id: number): Promise<Pokemon> {
     return fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
       .then((response) => response.json())
@@ -40,6 +42,10 @@ export class PokeApiPokemonGateway implements PokemonGateway {
       ),
       description: data.name,
     };
+  }
+
+  public getAllTypes(): Promise<PokemonType> {
+    return Promise.resolve(this.pokemonTypes);
   }
 }
 

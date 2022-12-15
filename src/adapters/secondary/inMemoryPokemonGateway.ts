@@ -1,8 +1,7 @@
-import { Pokemon, PokemonType } from "@/core/entities/pokemon";
-import { PokemonNotFound } from "@/core/errors/pokemonNotFound";
-import { TypeDoesNotExist } from "@/core/errors/TypeDoesNotExist";
-import { PokemonGateway } from "@/core/gateways/pokemonGateway";
-import { InvalidId } from "@/core/errors/invalidId";
+import {Pokemon, PokemonType} from "@/core/entities/pokemon";
+import {PokemonNotFound} from "@/core/errors/pokemonNotFound";
+import {PokemonGateway} from "@/core/gateways/pokemonGateway";
+import {pikachu} from "@/core/entities/pokemon.data";
 
 export class InMemoryPokemonGateway implements PokemonGateway {
   private pokemon: Array<Pokemon> = [];
@@ -16,10 +15,6 @@ export class InMemoryPokemonGateway implements PokemonGateway {
   }
 
   public findOne(id: number): Promise<Pokemon> {
-    if (isNaN(id) || id < 1) {
-      throw new InvalidId(id);
-    }
-
     const found: Pokemon | undefined = this.pokemon.find(
       (pokemon: Pokemon) => pokemon.id === id
     );
@@ -32,12 +27,13 @@ export class InMemoryPokemonGateway implements PokemonGateway {
   }
 
   public getPokemonByType(type: PokemonType): Promise<Array<Pokemon>> {
-    if (!Object.values(PokemonType).includes(type)) {
-      throw new TypeDoesNotExist(type);
-    }
     const filteredPokemon: Array<Pokemon> = this.pokemon.filter((pokemon) =>
       pokemon.types.includes(type)
     );
     return Promise.resolve(filteredPokemon);
+  }
+
+  public getAllTypes(): Promise<PokemonType> {
+    return Promise.resolve(PokemonType as any);
   }
 }
