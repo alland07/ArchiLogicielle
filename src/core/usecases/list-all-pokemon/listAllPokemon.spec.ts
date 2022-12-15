@@ -1,6 +1,6 @@
 import { InMemoryPokemonGateway } from "@/adapters/secondary/inMemoryPokemonGateway";
-import { Pokemon, PokemonType } from "@/core/entities/pokemon";
 import { listAllPokemon } from "./listAllPokemon";
+import { clefairy, haunter, pikachu } from "@/core/entities/pokemon.data";
 
 describe("List all pokemons", () => {
   let pokemonGateway: InMemoryPokemonGateway;
@@ -10,33 +10,12 @@ describe("List all pokemons", () => {
   });
 
   //Tests
-  it("should have [] when there is no items", async () => {
+  it("should have [] when there is none", async () => {
     await listAllPokemon(pokemonGateway);
     expect(await pokemonGateway.listAll()).toEqual([]);
   });
 
-  it("should store pokemons when there is items", async () => {
-    const pikachu: Pokemon = {
-      id: 25,
-      name: "Pikachu",
-      weight: 60,
-      description: "Pika Pika",
-      types: [PokemonType.ELECTRIC],
-    };
-    const clefairy: Pokemon = {
-      id: 35,
-      name: "Clefairy",
-      weight: 75,
-      description: "Clefairy",
-      types: [PokemonType.FAIRY],
-    };
-    const haunter: Pokemon = {
-      id: 93,
-      name: "Haunter",
-      weight: 1,
-      description: "Clefairy",
-      types: [PokemonType.POISON, PokemonType.GHOST],
-    };
+  it("should list all pokemons when there are some", async () => {
     pokemonGateway.feedWith(pikachu, clefairy, haunter);
     await listAllPokemon(pokemonGateway);
     expect(await pokemonGateway.listAll()).toEqual([
