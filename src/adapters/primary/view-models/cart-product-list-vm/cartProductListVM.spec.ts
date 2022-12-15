@@ -20,7 +20,10 @@ describe("Get a list of all products inside the cart", function (): void {
   });
 
   it("should return an empty array if the cart is empty", function (): void {
-    expect(cartListProductsVM()).toEqual({ items: [] });
+    expect(cartListProductsVM()).toEqual({
+      items: [],
+      total: "0 €",
+    });
   });
 
   it("should return an array of products if the cart is not empty", (): void => {
@@ -33,6 +36,7 @@ describe("Get a list of all products inside the cart", function (): void {
           price: "15 €",
         },
       ],
+      total: "15 €",
     });
   });
 });
