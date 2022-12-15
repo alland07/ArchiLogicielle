@@ -12,8 +12,8 @@ describe("List all pokemons", () => {
 
   //Tests
   it("should have [] when there is no items", async () => {
-    await listAllProducts(productGateway);
-    expect(await productGateway.listAll()).toEqual([]);
+    await listAllPokemon(pokemonGateway);
+    expect(await pokemonGateway.listAll()).toEqual([]);
   });
 
   it("should store pokemons when there is items", async () => {
