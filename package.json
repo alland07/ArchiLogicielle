@@ -3,7 +3,8 @@
   "scripts": {
     "test": "jest --coverage",
     "lint": "eslint --ext .ts,.vue --ignore-path .gitignore --fix src",
-    "format": "prettier .  --write"
+    "format": "prettier .  --write",
+    "dev": "ts-node-dev --respawn --transpile-only ./src/adapters/primary/express/app.ts"
   },
   "dependencies": {
     "express": "^4.18.2"
