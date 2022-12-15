@@ -1,5 +1,12 @@
 import { Pokemon, PokemonType } from "@/core/entities/pokemon";
 
+export const bulbasaur: Pokemon = {
+  id: 1,
+  name: "Bulbasaur",
+  types: [PokemonType.GRASS],
+  weight: 69,
+  description: "",
+};
 export const pikachu: Pokemon = {
   id: 25,
   name: "Pikachu",

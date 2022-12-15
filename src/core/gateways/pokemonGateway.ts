@@ -1,4 +1,4 @@
-import { Pokemon } from "../entities/pokemon";
+import { Pokemon, PokemonType } from "../entities/pokemon";
 
 export interface PokemonGateway {
   /**
@@ -12,6 +12,13 @@ export interface PokemonGateway {
    * @param id
    * @returns {Promise<Pokemon>} The pokemon found
    * @throws {PokemonNotFound} if pokemon not found
+   * @throws {InvalidId} if id is not a number or is < 1
    */
   findOne(id: number): Promise<Pokemon>;
+
+  /**
+   * Search pokemons by type
+   * @param type
+   */
+  getPokemonByType(type: PokemonType): Promise<Array<Pokemon>>;
 }

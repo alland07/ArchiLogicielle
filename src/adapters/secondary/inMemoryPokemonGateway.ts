@@ -1,6 +1,7 @@
 import { Pokemon } from "@/core/entities/pokemon";
 import { PokemonNotFound } from "@/core/errors/pokemonNotFound";
 import { PokemonGateway } from "@/core/gateways/pokemonGateway";
+import { InvalidId } from "@/core/errors/invalidId";
 
 export class InMemoryPokemonGateway implements PokemonGateway {
   private pokemon: Array<Pokemon> = [];
@@ -14,6 +15,10 @@ export class InMemoryPokemonGateway implements PokemonGateway {
   }
 
   public findOne(id: number): Promise<Pokemon> {
+    if (isNaN(id) || id < 1) {
+      throw new InvalidId(id);
+    }
+
     const found: Pokemon | undefined = this.pokemon.find(
       (pokemon: Pokemon) => pokemon.id === id
     );
