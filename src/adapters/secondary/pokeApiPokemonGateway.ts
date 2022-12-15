@@ -3,7 +3,6 @@ import { Pokemon, PokemonType } from "@/core/entities/pokemon";
 import axios from "axios";
 
 export class PokeApiPokemonGateway implements PokemonGateway {
-  private readonly pokemonTypes: any = PokemonType;
 
   public findOne(id: number): Promise<Pokemon> {
     return fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
@@ -16,7 +15,7 @@ export class PokeApiPokemonGateway implements PokemonGateway {
       "https://pokeapi.co/api/v2/pokemon", { headers: { "Accept-Encoding": "gzip,deflate,compress" } }
     )
       .then((response) => response.data)
-      .then((data: { results: ApiResource[] }) => data.results.sort((a, b) => a.id - b.id););
+      .then((data: { results: ApiResource[] }) => data.results.sort((a: any, b: any) => a.id - b.id));
 
     return Promise.all(
       pokemonsFromApi.map((pokemon) =>
@@ -29,7 +28,7 @@ export class PokeApiPokemonGateway implements PokemonGateway {
 
   public async getPokemonByType(type: PokemonType): Promise<Array<Pokemon>> {
     const pokemons: Pokemon[] = await this.listAll();
-    return pokemons.filter((pokemon) => pokemon.types.includes(type)).sort((a, b) => a.id - b.id);
+    return pokemons.filter((pokemon: Pokemon) => pokemon.types.includes(type));
   }
 
   private toPokemon(data: ApiPokemon): Pokemon {
@@ -45,7 +44,10 @@ export class PokeApiPokemonGateway implements PokemonGateway {
   }
 
   public getAllTypes(): Promise<PokemonType> {
-    return Promise.resolve(this.pokemonTypes);
+    // If we want to improve, we can use the data from api
+    // => but seems we have more types than them
+    // https://pokeapi.co/api/v2/type
+    return Promise.resolve(PokemonType as any);
   }
 }
 
