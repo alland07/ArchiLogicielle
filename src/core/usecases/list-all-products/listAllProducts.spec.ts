@@ -1,28 +1,19 @@
-import { BrowserCryptographyGateway } from "@/adapters/secondary/browserCryptographyGateway";
 import { InMemoryProductGateway } from "@/adapters/secondary/inMemoryProductGateway";
+import { NodeCryptographyGateway } from "@/adapters/secondary/nodeCryptographyGateway";
 import { Product } from "@/core/entities/product";
-import { ProductStore, useProductStore } from "@/store/productStore";
-import { createPinia, setActivePinia } from "pinia";
 import { listAllProducts } from "./listAllProducts";
 
 describe("List all products", () => {
-  //propre
-  const pinia = createPinia();
-  setActivePinia(pinia);
   let productGateway: InMemoryProductGateway;
-  const productStore: ProductStore = useProductStore();
 
   beforeEach(() => {
-    productStore.items = [];
-    productGateway = new InMemoryProductGateway(
-      new BrowserCryptographyGateway()
-    );
+    productGateway = new InMemoryProductGateway(new NodeCryptographyGateway());
   });
 
   //Tests
   it("should have [] when there is no items", async () => {
     await listAllProducts(productGateway);
-    expect(productStore.items).toEqual([]);
+    expect(await productGateway.listAll()).toEqual([]);
   });
 
   it("should store products when there is items", async () => {
@@ -38,6 +29,6 @@ describe("List all products", () => {
     };
     productGateway.feedWith(tshirt, pull);
     await listAllProducts(productGateway);
-    expect(productStore.items).toEqual([tshirt, pull]);
+    expect(await productGateway.listAll()).toEqual([tshirt, pull]);
   });
 });

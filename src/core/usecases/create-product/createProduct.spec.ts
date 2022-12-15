@@ -1,13 +1,10 @@
-import { BrowserCryptographyGateway } from "@/adapters/secondary/browserCryptographyGateway";
 import { InMemoryProductGateway } from "@/adapters/secondary/inMemoryProductGateway";
+import { NodeCryptographyGateway } from "@/adapters/secondary/nodeCryptographyGateway";
 import { CreateProduct, Product } from "@/core/entities/product";
-import { ProductStore, useProductStore } from "@/store/productStore";
-import { createPinia, setActivePinia } from "pinia";
 import { createProduct } from "./createProduct";
 
 describe("Create Product front", () => {
   let productGateway: InMemoryProductGateway;
-  let productStore: ProductStore;
   let products: Product[];
   const tshirt: Product = {
     id: "abc123",
@@ -20,16 +17,11 @@ describe("Create Product front", () => {
   };
 
   beforeEach((): void => {
-    productGateway = new InMemoryProductGateway(
-      new BrowserCryptographyGateway()
-    );
-    setActivePinia(createPinia());
-    productStore = useProductStore();
-    productStore.setItems([]);
+    productGateway = new InMemoryProductGateway(new NodeCryptographyGateway());
   });
 
   describe("When a product is created", () => {
-    const id = new BrowserCryptographyGateway().createId(
+    const id = new NodeCryptographyGateway().createId(
       newProduct.name,
       newProduct.price.toString()
     );
@@ -37,13 +29,6 @@ describe("Create Product front", () => {
     beforeEach(async () => {
       products = [];
       await createProduct(productGateway, newProduct);
-    });
-
-    it("should successfully create a new product and save it in the store", async (): Promise<void> => {
-      products = productStore.items;
-      expect(products).toEqual([
-        { id, name: newProduct.name, price: newProduct.price },
-      ]);
     });
 
     it("should successfully create a new product and save it in the gateway", async (): Promise<void> => {
@@ -61,7 +46,7 @@ describe("Create Product front", () => {
         price: 2000,
       };
 
-      const id2 = new BrowserCryptographyGateway().createId(
+      const id2 = new NodeCryptographyGateway().createId(
         product2.name,
         product2.price.toString()
       );
@@ -79,6 +64,6 @@ describe("Create Product front", () => {
 
   it("should throw a ProductAlreadyExists error when the product is already present", async () => {
     productGateway.feedWith(tshirt);
-    await expect(createProduct(productGateway, tshirt)).rejects.toThrow();
+    expect(() => createProduct(productGateway, tshirt)).toThrow();
   });
 });
