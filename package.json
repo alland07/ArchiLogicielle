@@ -4,9 +4,10 @@
     "test": "jest --coverage",
     "lint": "eslint --ext .ts,.vue --ignore-path .gitignore --fix src",
     "format": "prettier .  --write",
-    "dev": "ts-node-dev --respawn --transpile-only src/adapters/primary/express/index.ts"
+    "dev": "ts-node-dev --respawn --transpile-only src/adapters/primary/express/app.ts"
   },
   "dependencies": {
+    "axios": "^1.2.1",
     "express": "^4.18.2",
     "module-alias": "^2.2.2"
   },
@@ -25,7 +26,7 @@
     "typescript": "^4.9.4"
   },
   "packageManager": "yarn@3.2.4",
-  "_moduleAlias": {
+  "_moduleAliases": {
     "@": "./src"
   }
 }

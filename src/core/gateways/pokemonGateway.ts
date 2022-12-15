@@ -21,4 +21,10 @@ export interface PokemonGateway {
    * @param type
    */
   getPokemonByType(type: PokemonType): Promise<Array<Pokemon>>;
+
+  /**
+   * List of all Types available
+   * @returns listType
+   */
+  getAllTypes(): Promise<PokemonType>;
 }

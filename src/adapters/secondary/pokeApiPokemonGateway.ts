@@ -10,25 +10,22 @@ export class PokeApiPokemonGateway implements PokemonGateway {
   }
 
   public async listAll(): Promise<Array<Pokemon>> {
-    const pokemonsFromApi: ApiResource[] = await fetch(
-      "https://pokeapi.co/api/v2/pokemon"
+    const pokemonsFromApi: ApiResource[] = await axios.get(
+      "https://pokeapi.co/api/v2/pokemon", { headers: { "Accept-Encoding": "gzip,deflate,compress" } }
     )
-      .then((response) => response.json())
-      .then((data: { results: ApiResource[] }) => data.results);
+      .then((response) => response.data)
+      .then((data: { results: ApiResource[] }) => data.results.sort((a, b) => a.id - b.id););
 
     return Promise.all(
       pokemonsFromApi.map((pokemon) =>
-        fetch(pokemon.url)
-          .then((response) => response.json())
+        axios.get(pokemon.url, { headers: { "Accept-Encoding": "gzip,deflate,compress" } })
+          .then((response) => response.data)
           .then((data: ApiPokemon) => this.toPokemon(data))
       )
     );
   }
 
   public async getPokemonByType(type: PokemonType): Promise<Array<Pokemon>> {
-    if (!Object.values(PokemonType).includes(type)) {
-      throw new TypeDoesNotExist(type);
-    }
     const pokemons: Pokemon[] = await this.listAll();
     return pokemons.filter((pokemon) => pokemon.types.includes(type));
   }

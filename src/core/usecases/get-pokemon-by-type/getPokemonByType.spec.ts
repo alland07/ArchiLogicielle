@@ -1,11 +1,7 @@
-import { InMemoryPokemonGateway } from "@/adapters/secondary/inMemoryPokemonGateway";
-import {
-  clefairy,
-  gastly,
-  haunter,
-  pikachu,
-} from "@/core/entities/pokemon.data";
-import { PokemonType } from "../../entities/pokemon";
+import {InMemoryPokemonGateway} from "@/adapters/secondary/inMemoryPokemonGateway";
+import {clefairy, gastly, gengar, haunter, pikachu,} from "@/core/entities/pokemon.data";
+import {PokemonType} from "../../entities/pokemon";
+import {getPokemonByType} from "./getPokemonByType"
 
 describe("List pokemon by type", () => {
   let pokemonGateway: InMemoryPokemonGateway;
@@ -15,8 +11,7 @@ describe("List pokemon by type", () => {
   // Tests about the type
   describe("Type does not exist", function () {
     it("should return an error if passing a wrong type", async () => {
-      expect(() =>
-        pokemonGateway.getPokemonByType("fre" as PokemonType)
+      expect(() => getPokemonByType(pokemonGateway, "fre" as PokemonType)
       ).toThrow("fre is invalid");
     });
   });
