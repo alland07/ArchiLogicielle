@@ -1,5 +1,4 @@
 import { InMemoryPokemonGateway } from "@/adapters/secondary/inMemoryPokemonGateway";
-import { NodeCryptographyGateway } from "@/adapters/secondary/nodeCryptographyGateway";
 import { Pokemon, PokemonType } from "@/core/entities/pokemon";
 import { listAllPokemon } from "./listAllPokemon";
 
@@ -7,7 +6,7 @@ describe("List all pokemons", () => {
   let pokemonGateway: InMemoryPokemonGateway;
 
   beforeEach(() => {
-    pokemonGateway = new InMemoryPokemonGateway(new NodeCryptographyGateway());
+    pokemonGateway = new InMemoryPokemonGateway();
   });
 
   //Tests
