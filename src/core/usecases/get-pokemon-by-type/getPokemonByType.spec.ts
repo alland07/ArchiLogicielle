@@ -11,8 +11,8 @@ describe("List pokemon by type", () => {
   // Tests about the type
   describe("Type does not exist", function () {
     it("should return an error if passing a wrong type", async () => {
-      expect(() => getPokemonByType(pokemonGateway, "fre" as PokemonType)
-      ).toThrow("fre is invalid");
+      await expect(() => getPokemonByType(pokemonGateway, "fre" as PokemonType)
+      ).rejects.toThrow("fre is invalid");
     });
   });
   //Tests with GHOST Type
