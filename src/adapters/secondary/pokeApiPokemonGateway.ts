@@ -1,5 +1,6 @@
 import { PokemonGateway } from "@/core/gateways/pokemonGateway";
 import { Pokemon, PokemonType } from "@/core/entities/pokemon";
+import { TypeDoesNotExist } from "@/core/errors/typeDoesNotExist";
 
 export class PokeApiPokemonGateway implements PokemonGateway {
   public findOne(id: number): Promise<Pokemon> {
@@ -25,6 +26,9 @@ export class PokeApiPokemonGateway implements PokemonGateway {
   }
 
   public async getPokemonByType(type: PokemonType): Promise<Array<Pokemon>> {
+    if (!Object.values(PokemonType).includes(type)) {
+      throw new TypeDoesNotExist(type);
+    }
     const pokemons: Pokemon[] = await this.listAll();
     return pokemons.filter((pokemon) => pokemon.types.includes(type));
   }

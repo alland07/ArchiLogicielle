@@ -1,14 +1,11 @@
 import express from "express";
-import { createServer } from "http";
 import { Pokemon, PokemonType } from "@/core/entities/pokemon";
 import { pokemonGateway } from "@/adapters/primary/dependencies";
+import { TypeDoesNotExist } from "@/core/errors/typeDoesNotExist";
+import { PokemonNotFound } from "@/core/errors/pokemonNotFound";
+import { InvalidId } from "@/core/errors/invalidId";
 
-const app = express();
-const server = createServer(app);
-
-server.listen(3000, () => {
-  console.log("Server is running on port 3000");
-});
+export const app = express();
 
 app.use(express.json());
 
@@ -16,27 +13,37 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
-app.get("/pokemons", async (req, res) => {
-  const pokemons: Pokemon[] = await pokemonGateway.listAll();
-  res.send(pokemons);
-});
-
-app.get("/pokemons/:id", async (req, res) => {
-  const id = parseInt(req.params.id);
-  if (isNaN(id) || id <= 0) {
-    res.status(400).send("Invalid id");
-  }
-
-  const pokemon = await pokemonGateway.findOne(id);
+app.get("/pokemon", async (req, res) => {
+  const pokemon: Pokemon[] = await pokemonGateway.listAll();
   res.send(pokemon);
 });
 
-app.get("/pokemons/type/:type", async (req, res) => {
-  const type = req.params.type;
-  if (!Object.values(PokemonType).includes(type as PokemonType)) {
-    res.status(400).send("Invalid type");
-  }
+app.get("/pokemon/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+  pokemonGateway
+    .findOne(id)
+    .then((pokemon) => res.send(pokemon))
+    .catch((error) => {
+      if (error instanceof PokemonNotFound) {
+        res.status(404).send(error.message);
+      } else if (error instanceof InvalidId) {
+        res.status(400).send(error.message);
+      } else {
+        res.status(500).send(error.message);
+      }
+    });
+});
 
-  const pokemons = await pokemonGateway.getPokemonByType(type as PokemonType);
-  res.send(pokemons);
+app.get("/pokemon/type/:type", (req, res) => {
+  const type = req.params.type;
+  pokemonGateway
+    .getPokemonByType(type as PokemonType)
+    .then((pokemons: Pokemon[]) => res.send(pokemons))
+    .catch((error) => {
+      if (error instanceof TypeDoesNotExist) {
+        res.status(400).send(error.message);
+      } else {
+        res.status(500).send("Internal server error");
+      }
+    });
 });

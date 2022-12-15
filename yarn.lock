@@ -1019,6 +1019,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/module-alias@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@types/module-alias@npm:2.0.1"
+  checksum: c6d6d30605833b03465c39760df42616fd24e4f532a29bb77954220885feb21eb2d84dd38eed68b0c18997e6930fdc5914d2dc6fd7cc5d110a42068d2204e11e
+  languageName: node
+  linkType: hard
+
 "@types/node@npm:*, @types/node@npm:^18.11.15":
   version: 18.11.15
   resolution: "@types/node@npm:18.11.15"
@@ -3649,6 +3656,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"module-alias@npm:^2.2.2":
+  version: 2.2.2
+  resolution: "module-alias@npm:2.2.2"
+  checksum: 4b5543f834b484033e5bd184096ca8276b9195e32e88883ee6ea8d3a4789d97c470d26f5fa7271bd7a26588bf67e4d27dbdb594ee327aef1c9619d855dc78342
+  languageName: node
+  linkType: hard
+
 "ms@npm:2.0.0":
   version: 2.0.0
   resolution: "ms@npm:2.0.0"
@@ -4212,11 +4226,13 @@ __metadata:
   dependencies:
     "@types/express": ^4.17.14
     "@types/jest": ^29.2.4
+    "@types/module-alias": ^2.0.1
     "@types/node": ^18.11.15
     eslint: ^8.29.0
     eslint-config-prettier: ^8.5.0
     express: ^4.18.2
     jest: ^29.3.1
+    module-alias: ^2.2.2
     prettier: ^2.8.1
     prettier-plugin-organize-imports: ^3.2.1
     ts-jest: ^29.0.3
