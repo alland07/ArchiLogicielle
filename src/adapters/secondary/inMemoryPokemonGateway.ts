@@ -1,5 +1,6 @@
-import { Pokemon } from "@/core/entities/pokemon";
+import { Pokemon, PokemonType } from "@/core/entities/pokemon";
 import { PokemonNotFound } from "@/core/errors/pokemonNotFound";
+import { TypeDoesNotExist } from "@/core/errors/TypeDoesNotExist";
 import { PokemonGateway } from "@/core/gateways/pokemonGateway";
 import { InvalidId } from "@/core/errors/invalidId";
 
@@ -28,5 +29,15 @@ export class InMemoryPokemonGateway implements PokemonGateway {
     }
 
     return Promise.resolve(found);
+  }
+
+  public getPokemonByType(type: PokemonType): Promise<Array<Pokemon>> {
+    if (!Object.values(PokemonType).includes(type)) {
+      throw new TypeDoesNotExist(type);
+    }
+    const filteredPokemon: Array<Pokemon> = this.pokemon.filter((pokemon) =>
+      pokemon.types.includes(type)
+    );
+    return Promise.resolve(filteredPokemon);
   }
 }

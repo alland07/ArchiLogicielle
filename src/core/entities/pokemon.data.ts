@@ -21,10 +21,27 @@ export const clefairy: Pokemon = {
   description: "Clefairy",
   types: [PokemonType.FAIRY],
 };
+
+export const gastly: Pokemon = {
+  id: 92,
+  name: "Gastly",
+  weight: 1,
+  description: "gastly",
+  types: [PokemonType.POISON, PokemonType.GHOST],
+};
+
 export const haunter: Pokemon = {
   id: 93,
   name: "Haunter",
   weight: 1,
-  description: "Clefairy",
+  description: "Haunter",
+  types: [PokemonType.POISON, PokemonType.GHOST],
+};
+
+export const gengar: Pokemon = {
+  id: 94,
+  name: "Gengar",
+  weight: 405,
+  description: "gengar",
   types: [PokemonType.POISON, PokemonType.GHOST],
 };
