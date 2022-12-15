@@ -5,9 +5,14 @@ import {pikachu} from "@/core/entities/pokemon.data";
 
 export class InMemoryPokemonGateway implements PokemonGateway {
   private pokemon: Array<Pokemon> = [];
+  private readonly pokemonTypes: any = PokemonType;
 
   public listAll(): Promise<Array<Pokemon>> {
-    return Promise.resolve(this.pokemon);
+
+    const sortedPokemonById: Array<Pokemon> = this.pokemon
+        .sort((a, b) => a.id - b.id);
+
+    return Promise.resolve(sortedPokemonById);
   }
 
   feedWith(...pokemon: Array<Pokemon>) {

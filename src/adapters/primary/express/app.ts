@@ -8,7 +8,7 @@ import {pokemonGateway} from "@/adapters/primary/dependencies";
 // This needs to come first for resolving aliases
 // moduleAlias.addAlias("@", path.join(__dirname, "..", "..", "..", "..", "src"));
 
-export const app = express();
+const app = express();
 
 // require('./pokemon')(app);
 

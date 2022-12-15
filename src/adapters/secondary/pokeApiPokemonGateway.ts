@@ -29,7 +29,7 @@ export class PokeApiPokemonGateway implements PokemonGateway {
 
   public async getPokemonByType(type: PokemonType): Promise<Array<Pokemon>> {
     const pokemons: Pokemon[] = await this.listAll();
-    return pokemons.filter((pokemon) => pokemon.types.includes(type));
+    return pokemons.filter((pokemon) => pokemon.types.includes(type)).sort((a, b) => a.id - b.id);
   }
 
   private toPokemon(data: ApiPokemon): Pokemon {
