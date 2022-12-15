@@ -23,7 +23,7 @@ describe("List all pokemons", () => {
       haunter,
     ]);
   });
-
+  //On this test, we feed in a different order
   it("should list all pokemons retrieves in the good order", async () => {
     pokemonGateway.feedWith(pikachu, bulbasaur, clefairy, haunter);
     expect(await listAllPokemon(pokemonGateway)).toEqual([

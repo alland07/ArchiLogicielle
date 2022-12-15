@@ -11,6 +11,4 @@ export const getPokemonByType = async (
     }
     const pokemonList = await (pokemonGateway.getPokemonByType(type))
     return pokemonList.sort((a: any, b: any) => a.id - b.id);
-
-
 };

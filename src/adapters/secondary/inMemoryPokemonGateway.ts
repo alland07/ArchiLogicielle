@@ -1,18 +1,12 @@
 import {Pokemon, PokemonType} from "@/core/entities/pokemon";
 import {PokemonNotFound} from "@/core/errors/pokemonNotFound";
 import {PokemonGateway} from "@/core/gateways/pokemonGateway";
-import {pikachu} from "@/core/entities/pokemon.data";
 
 export class InMemoryPokemonGateway implements PokemonGateway {
   private pokemon: Array<Pokemon> = [];
-  private readonly pokemonTypes: any = PokemonType;
 
   public listAll(): Promise<Array<Pokemon>> {
-
-    const sortedPokemonById: Array<Pokemon> = this.pokemon
-        .sort((a, b) => a.id - b.id);
-
-    return Promise.resolve(sortedPokemonById);
+    return Promise.resolve(this.pokemon);
   }
 
   feedWith(...pokemon: Array<Pokemon>) {
