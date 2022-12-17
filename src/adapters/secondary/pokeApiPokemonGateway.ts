@@ -1,6 +1,6 @@
 import { PokemonGateway } from "@/core/gateways/pokemonGateway";
 import { Pokemon, PokemonType } from "@/core/entities/pokemon";
-import axios from "axios";
+import axios, {AxiosResponse} from "axios";
 
 export class PokeApiPokemonGateway implements PokemonGateway {
 
@@ -26,9 +26,10 @@ export class PokeApiPokemonGateway implements PokemonGateway {
     );
   }
 
-  public async getPokemonByType(type: PokemonType): Promise<Array<Pokemon>> {
-    const pokemons: Pokemon[] = await this.listAll();
-    return pokemons.filter((pokemon: Pokemon) => pokemon.types.includes(type));
+  public async getPokemonByType(type: any): Promise<Array<Pokemon>> {
+    return await axios.get(
+      `https://pokeapi.co/api/v2/type/${type}`, { headers: { "Accept-Encoding": "gzip,deflate,compress" } }
+    ).then((response: AxiosResponse<ApiTypeResponse>) => response.data.pokemon);
   }
 
   private toPokemon(data: ApiPokemon): Pokemon {
@@ -65,4 +66,8 @@ interface ApiPokemonType {
 interface ApiResource {
   name: string;
   url: string;
+}
+
+interface ApiTypeResponse {
+  pokemon : Array<Pokemon>;
 }
