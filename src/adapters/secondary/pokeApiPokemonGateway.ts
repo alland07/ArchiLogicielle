@@ -12,7 +12,7 @@ export class PokeApiPokemonGateway implements PokemonGateway {
 
   public async listAll(): Promise<Array<Pokemon>> {
     const pokemonsFromApi: ApiResource[] = await axios.get(
-      "https://pokeapi.co/api/v2/pokemon", { headers: { "Accept-Encoding": "gzip,deflate,compress" } }
+      "https://pokeapi.co/api/v2/pokemon/?limit=100", { headers: { "Accept-Encoding": "gzip,deflate,compress" } }
     )
       .then((response) => response.data)
       .then((data: { results: ApiResource[] }) => data.results.sort((a: any, b: any) => a.id - b.id));
